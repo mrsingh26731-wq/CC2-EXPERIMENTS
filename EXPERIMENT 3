@@ -1,0 +1,68 @@
+EXPERIMENT 3.1
+AIM: Implement a first in first out (FIFO) queue using only two stacks.The implemented queue should support all the functions of a normal queue (push, peek, pop, and empty).
+
+ALGORITHM:
+Step 1: Start.
+Step 2: Create two empty stacks:
+        - s1
+        - s2
+Step 3: To perform push(x):
+        a) Move all elements from s1 to s2.
+        b) Push the new element x into s1.
+        c) Move all elements back from s2 to s1.
+Step 4: To perform pop():
+        a) Store the top element of s1 in a temporary variable.
+        b) Remove the top element from s1.
+        c) Return the stored element.
+Step 5: To perform peek():
+        a) Return the top element of s1 without removing it.
+Step 6: To perform empty():
+        a) If s1 is empty, return true.
+        b) Otherwise, return false.
+Step 7: Stop.
+
+CODE:
+class MyQueue {
+private:
+    stack<int> s1;
+    stack<int> s2;
+public:
+    MyQueue() {
+    }
+    void push(int x) {
+        while (!s1.empty()) {
+            s2.push(s1.top());
+            s1.pop();
+        }
+        s1.push(x);
+        while (!s2.empty()) {
+            s1.push(s2.top());
+            s2.pop();
+        }
+    }
+    int pop() {
+        int temp = s1.top();
+        s1.pop();
+        return temp;
+    }
+    int peek() {
+        return s1.top();
+    }
+    bool empty() {
+        return s1.empty();
+    }
+};
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */
+Learning Outcomes:
+1. Understand how to implement a queue using two stacks.
+2. Learn the FIFO (First In, First Out) principle of a queue.
+3. Perform queue operations (push, pop, peek, and empty) using stacks.
+4. Analyze the time complexity of each queue operation.
+5. Understand how stack operations can be used to simulate queue behavior.
