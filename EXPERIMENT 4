@@ -1,0 +1,91 @@
+EXPERIMENT-4.1
+AIM-Given the head of a singly linked list, return the middle node of the linked list.If there are two middle nodes, return the second middle node.
+
+ALGORITHM:
+1. Start
+2. Initialize two pointers:
+   slow = head
+   fast = head
+3. Traverse the linked list using the condition:
+   fast != nullptr && fast->next != nullptr
+4. In each iteration:
+   Move slow one node forward: slow = slow->next
+   Move fast two nodes forward: fast = fast->next->next
+5. When fast reaches the end of the list, slow will be pointing to the middle node.
+6. Return slow.
+7. Stop
+
+CODE:
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+        } 
+
+        return slow;
+    }
+};
+
+LERANING OUTCOMES:
+1. Understand and implement linked list traversal.
+2. Learn the slow and fast pointer technique.
+3. Find the middle element of a linked list efficiently.
+4. Understand how two pointers can traverse a data structure at different speeds.
+5. Analyze the time complexity: O(n) and space complexity: O(1).
+6. Improve problem-solving skills for linked-list-based problems.
+
+EXPERIMENT-4.2
+AIM:Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+
+ALGORITHM:
+1. Start
+2. Create an empty stack st.
+3. Set a temporary pointer:
+   temp = head
+4. Traverse the linked list and push each node's value into the stack.
+5. Reset temp = head.
+6. Traverse the linked list again:
+   Compare temp->val with st.top().
+   If they are different, return false.
+   Otherwise, remove the top element using st.pop().
+   Move temp to the next node.
+7. If all values match, return true.
+8. Stop
+
+CODE:
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        stack<int> st;
+        ListNode* temp = head;
+        while (temp != nullptr) {
+            st.push(temp->val);
+            temp = temp->next;
+        }
+        temp = head;
+        while (temp != nullptr) {
+            if (temp->val != st.top()) {
+                return false;
+            }
+            st.pop();
+            temp = temp->next;
+        }
+        return true;
+    }
+};
+
+
+LEARNING OUTCOMES:
+1. Understand the concept of a palindrome in a linked list.
+2. Learn to traverse a linked list using pointers.
+3. Learn to use a stack for storing and comparing elements.
+4. Understand the LIFO (Last In, First Out) property of a stack.
+5. Develop problem-solving skills using linked lists and stacks.
+6. Understand the time complexity of the algorithm as O(n).
+7. Understand the space complexity of the algorithm as O(n).
